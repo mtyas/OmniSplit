@@ -1,0 +1,151 @@
+name: Build OmniSplit Multi-Platform
+
+on:
+  push:
+    branches: [ master, main ]
+    tags: [ 'v*' ]
+  pull_request:
+    branches: [ master, main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build on ${{ matrix.name }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: Windows (x64)
+            os: windows-latest
+            artifact_name: OmniSplit-Windows-x64
+            test_binary: build/Release/OmniSplitTests.exe
+          - name: macOS (Universal arm64/x86_64)
+            os: macos-14
+            artifact_name: OmniSplit-macOS-Universal
+            cmake_flags: -DCMAKE_OSX_ARCHITECTURES="arm64;x86_64"
+            test_binary: ./build/OmniSplitTests
+          - name: Linux (x86_64)
+            os: ubuntu-22.04
+            artifact_name: OmniSplit-Linux-x64
+            test_binary: ./build/OmniSplitTests
+
+    steps:
+      - name: Checkout Code & Submodules
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Install Linux Dependencies
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq \
+            build-essential \
+            cmake \
+            libasound2-dev \
+            libjack-jackd2-dev \
+            libgl1-mesa-dev \
+            libx11-dev \
+            libxcomposite-dev \
+            libxcursor-dev \
+            libxinerama-dev \
+            libxrandr-dev \
+            libxrender-dev \
+            libfontconfig1-dev \
+            libfreetype6-dev \
+            libcurl4-openssl-dev
+
+      - name: Configure CMake
+        run: |
+          cmake -B build -DCMAKE_BUILD_TYPE=Release ${{ matrix.cmake_flags }}
+
+      - name: Compile Plugins & Test Suite
+        run: |
+          cmake --build build --config Release --parallel
+
+      - name: Run Automated Test Suite
+        run: |
+          ${{ matrix.test_binary }}
+
+      - name: Package Artifacts (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path artifacts/OmniSplit | Out-Null
+          if (Test-Path "build/OmniSplit_artefacts/Release/VST3/OmniSplit.vst3") {
+            Copy-Item -Recurse "build/OmniSplit_artefacts/Release/VST3/OmniSplit.vst3" artifacts/OmniSplit/
+          }
+          if (Test-Path "build/OmniSplit_artefacts/Release/CLAP/OmniSplit.clap") {
+            Copy-Item "build/OmniSplit_artefacts/Release/CLAP/OmniSplit.clap" artifacts/OmniSplit/
+          }
+          if (Test-Path "build/OmniSplit_artefacts/Release/Standalone/OmniSplit.exe") {
+            Copy-Item "build/OmniSplit_artefacts/Release/Standalone/OmniSplit.exe" artifacts/OmniSplit/
+          }
+          Copy-Item README.md artifacts/OmniSplit/
+          Copy-Item MANUAL.md artifacts/OmniSplit/
+          Compress-Archive -Path artifacts/OmniSplit/* -DestinationPath "${{ matrix.artifact_name }}.zip"
+
+      - name: Package Artifacts (macOS)
+        if: runner.os == 'macOS'
+        run: |
+          mkdir -p artifacts/OmniSplit
+          if [ -d "build/OmniSplit_artefacts/Release/VST3/OmniSplit.vst3" ]; then
+            cp -R build/OmniSplit_artefacts/Release/VST3/OmniSplit.vst3 artifacts/OmniSplit/
+          elif [ -d "build/OmniSplit_artefacts/OmniSplit.vst3" ]; then
+            cp -R build/OmniSplit_artefacts/OmniSplit.vst3 artifacts/OmniSplit/
+          fi
+          if [ -d "build/OmniSplit_artefacts/Release/AU/OmniSplit.component" ]; then
+            cp -R build/OmniSplit_artefacts/Release/AU/OmniSplit.component artifacts/OmniSplit/
+          elif [ -d "build/OmniSplit_artefacts/OmniSplit.component" ]; then
+            cp -R build/OmniSplit_artefacts/OmniSplit.component artifacts/OmniSplit/
+          fi
+          if [ -f "build/OmniSplit_artefacts/Release/CLAP/OmniSplit.clap" ]; then
+            cp build/OmniSplit_artefacts/Release/CLAP/OmniSplit.clap artifacts/OmniSplit/
+          elif [ -d "build/OmniSplit_artefacts/Release/CLAP/OmniSplit.clap" ]; then
+            cp -R build/OmniSplit_artefacts/Release/CLAP/OmniSplit.clap artifacts/OmniSplit/
+          fi
+          if [ -d "build/OmniSplit_artefacts/Release/Standalone/OmniSplit.app" ]; then
+            cp -R build/OmniSplit_artefacts/Release/Standalone/OmniSplit.app artifacts/OmniSplit/
+          fi
+          cp README.md artifacts/OmniSplit/
+          cp MANUAL.md artifacts/OmniSplit/
+          cd artifacts && zip -r ../${{ matrix.artifact_name }}.zip OmniSplit && cd ..
+
+      - name: Package Artifacts (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          mkdir -p artifacts/OmniSplit
+          find build -name "OmniSplit.vst3" -exec cp -r {} artifacts/OmniSplit/ \;
+          find build -name "OmniSplit.clap" -exec cp -r {} artifacts/OmniSplit/ \;
+          find build -name "OmniSplit" -type f -executable -exec cp {} artifacts/OmniSplit/ \;
+          cp README.md artifacts/OmniSplit/
+          cp MANUAL.md artifacts/OmniSplit/
+          cd artifacts && zip -r ../${{ matrix.artifact_name }}.zip OmniSplit && cd ..
+
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.artifact_name }}
+          path: ${{ matrix.artifact_name }}.zip
+          retention-days: 30
+
+  release:
+    name: Create GitHub Release
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Download All Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: release-artifacts
+
+      - name: Publish Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: release-artifacts/**/*.zip
+          generate_release_notes: true
