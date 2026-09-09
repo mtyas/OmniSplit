@@ -1,10 +1,11 @@
 # 🎛️ OmniSplit: Multi-Domain Modular Audio Processing & Spectral Splitting Suite
-### Developed by **mtyas** | VST3 • CLAP • Standalone (Windows / macOS / Linux)
+### Developed by **mtyas** | VST3 • CLAP • AU • Standalone (Windows / macOS / Linux)
 
 [![C++20](https://img.shields.io/badge/Language-C%2B%2B20-blue.svg)](https://isocpp.org/)
 [![JUCE 8](https://img.shields.io/badge/Framework-JUCE_8-orange.svg)](https://juce.com/)
 [![Format](https://img.shields.io/badge/Format-VST3_%7C_CLAP_%7C_Standalone-green.svg)](https://github.com/free-audio/clap)
 [![Tests](https://img.shields.io/badge/Tests-18%2F18%20Passing-brightgreen.svg)]()
+[![Latest Release](https://img.shields.io/github/v/release/mtyas/OmniSplit?color=brightgreen&label=Release%20v1.0.0)](https://github.com/mtyas/OmniSplit/releases/latest)
 [![License](https://img.shields.io/badge/License-Proprietary-red.svg)]()
 
 ---
@@ -34,6 +35,18 @@
 |  - Visual DAG Connection Cords   |  - Split Balance, Master Dry/Wet, Master Level Staging          |
 +----------------------------------------------------------------------------------------------------+
 ```
+
+---
+
+## 📦 Downloads & Pre-Built Binaries
+
+Pre-compiled production releases for Windows, macOS, and Linux are available from the [**OmniSplit Releases Page**](https://github.com/mtyas/OmniSplit/releases/latest):
+
+| OS / Platform | Download Package | Included Formats | Architecture |
+| :--- | :--- | :--- | :--- |
+| **Windows** | [📥 **OmniSplit-v1.0.0-Windows.zip**](https://github.com/mtyas/OmniSplit/releases/download/v1.0.0/OmniSplit-v1.0.0-Windows.zip) | VST3, CLAP, Standalone (`OmniSplit.exe`) | x86_64 |
+| **macOS** | [📥 **OmniSplit-v1.0.0-macOS-Universal.zip**](https://github.com/mtyas/OmniSplit/releases/download/v1.0.0/OmniSplit-v1.0.0-macOS-Universal.zip) | VST3, CLAP, AudioUnit (`.component`), Standalone (`OmniSplit.app`) | Universal (Apple Silicon & Intel) |
+| **Linux** | [📥 **OmniSplit-v1.0.0-Linux-x64.zip**](https://github.com/mtyas/OmniSplit/releases/download/v1.0.0/OmniSplit-v1.0.0-Linux-x64.zip) | VST3, CLAP, Standalone | x86_64 |
 
 ---
 
@@ -123,6 +136,11 @@ cmake --build build --config Release --target OmniSplit_VST3 OmniSplit_CLAP Omni
 # Run automated test suite
 ./build/Release/OmniSplitTests.exe
 ```
+
+---
+
+## 📖 Documentation
+- [Full User Manual (`MANUAL.md`)](MANUAL.md) - Comprehensive technical guide, DSP architecture, algorithm explanations, and routing reference.
 
 ---
 
