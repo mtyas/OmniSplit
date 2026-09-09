@@ -15,6 +15,8 @@
 
 ## 📸 Architecture & Feature Matrix
 
+![OmniSplit Interface](docs/images/omnisplit_screenshot.png)
+
 ```
 +----------------------------------------------------------------------------------------------------+
 |  OMNISPLIT                      [ PRESET: 01 - Harmonic Shimmer & Spatialize ]     [UNDO] [REDO]   |
