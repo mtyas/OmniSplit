@@ -16,7 +16,7 @@
 
 ## 📸 Architecture & Feature Matrix
 
-![OmniSplit Interface](docs/images/omnisplit_screenshot.png)
+<img src="docs/images/omnisplit_screenshot.png" alt="OmniSplit Interface" width="100%">
 
 ```
 +----------------------------------------------------------------------------------------------------+
