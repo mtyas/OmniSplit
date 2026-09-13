@@ -144,5 +144,13 @@ cmake --build build --config Release --target OmniSplit_VST3 OmniSplit_CLAP Omni
 
 ---
 
+## Support & Donations
+
+To support my work and encourage me to do more, please consider leaving a tip at [https://ko-fi.com/mtyas](https://ko-fi.com/mtyas).
+
+[![Support on Ko-fi](https://img.shields.io/badge/Ko--fi-Support%20My%20Work-ff5e5b?logo=ko-fi&logoColor=white)](https://ko-fi.com/mtyas)
+
+---
+
 ## 📄 License
 Proprietary software. Developed by **mtyas**. All rights reserved.
