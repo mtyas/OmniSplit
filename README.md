@@ -1,46 +1,135 @@
 # 🎛️ OmniSplit: Multi-Domain Modular Audio Processing & Spectral Splitting Suite
 ### Developed by **mtyas** | VST3 • CLAP • AU • Standalone (Windows / macOS / Linux)
 
-[![C++20](https://img.shields.io/badge/Language-C%2B%2B20-blue.svg)](https://isocpp.org/)
-[![JUCE 8](https://img.shields.io/badge/Framework-JUCE_8-orange.svg)](https://juce.com/)
-[![Format](https://img.shields.io/badge/Format-VST3_%7C_CLAP_%7C_Standalone-green.svg)](https://github.com/free-audio/clap)
+[![Latest Release](https://img.shields.io/github/v/release/mtyas/OmniSplit?color=brightgreen&label=Download%20Release%20v1.0.0)](https://github.com/mtyas/OmniSplit/releases/latest)
+[![Presets](https://img.shields.io/badge/Algorithms-35%20Studio%20FX-purple.svg)](MANUAL.md#effects-catalog)
+[![Format](https://img.shields.io/badge/Formats-VST3_%7C_CLAP_%7C_AU_%7C_Standalone-green.svg)](https://github.com/free-audio/clap)
 [![Tests](https://img.shields.io/badge/Tests-18%2F18%20Passing-brightgreen.svg)]()
-[![Latest Release](https://img.shields.io/github/v/release/mtyas/OmniSplit?color=brightgreen&label=Release%20v1.0.0)](https://github.com/mtyas/OmniSplit/releases/latest)
-[![License](https://img.shields.io/badge/License-Proprietary-red.svg)]()
+[![Support on Ko-fi](https://img.shields.io/badge/Ko--fi-Support%20My%20Work-ff5e5b?logo=ko-fi&logoColor=white)](https://ko-fi.com/mtyas)
 
 ---
 
-**OmniSplit** is a modular multi-domain audio processor and creative sound design workstation. It deconstructs incoming audio across **6 real-time physical & mathematical decomposition domains** (transient/sustain, 3-band ZDF filterbank, Mid/Side stereo, dynamic amplitude, spectral harmonicity, and phase/spatial correlation) and routes each stream into an **8-slot modular effects rack** with 35 studio-grade algorithms, complete inter-slot DAG patching, and a modulation engine with LFOs, multi-source envelope followers, Turing machines, XY pads, and an 8-slot live modulation matrix.
+> ### ⚡ Quick Action & Links
+> - [📥 **Download Latest Binaries (Windows / macOS / Linux)**](https://github.com/mtyas/OmniSplit/releases/latest)
+> - [📖 **Read Full User Manual (`MANUAL.md`)**](MANUAL.md)
+> - [🎛️ **Studio Ecosystem Routing (Pairs Well With)**](#-pairs-well-with-studio-ecosystem-synergy)
+> - [✂️ **6 Multi-Domain Pre-Processor Splitters**](#-6-multi-domain-real-time-decomposition-splitters)
 
 ---
 
-## 📸 Architecture & Feature Matrix
+## 🔊 Sonic Transformation & Overview
 
-<img src="docs/images/omnisplit_screenshot.png" alt="OmniSplit Interface" width="100%">
+**OmniSplit** is a modular sound design workstation and surgical mixing suite. Rather than applying effects across an entire audio signal, OmniSplit deconstructs incoming audio across **6 real-time physical and mathematical decomposition domains**:
+
+1. **Transient / Sustain**: Separate the instantaneous impact click from the low-frequency resonant body.
+2. **3-Band ZDF Filterbank**: Isolate Low, Mid, and High frequency bands with Zero-Delay Feedback state variable filters.
+3. **Mid / Side Stereo**: Decouple centered in-phase mono power from wide out-of-phase stereo ambience.
+4. **Dynamic Amplitude**: Split loud transient peaks from subtle background tails, room ambience, and ghost notes.
+5. **Spectral Harmonicity**: Isolate steady tonal harmonic content from stochastic noise and breath textures.
+6. **Phase / Spatial Correlation**: Separate phase-coherent mono signals from diffuse, decorrelated stereo fields.
+
+Route each decomposed stream through an **8-slot modular effects rack** featuring **35 studio-grade DSP algorithms**—including analog tape saturators, Chebyshev wavefolders, granular reverse glitchers, FET compressors, and Dattorro shimmer reverbs. Patch and cable connections visually using an interactive DAG audio routing matrix, and modulate parameters with synchronized LFOs, envelope followers, and Turing machines.
+
+---
+
+## 📸 Interface & Visual Tour
+
+<p align="center">
+  <img src="docs/images/omnisplit_full.png" alt="OmniSplit Multi-Domain Interface" width="100%">
+</p>
+
+### 🔍 Detailed Interface Breakdown
+
+| 6 Real-Time Pre-Processor Splitters | 8-Slot Modular Effects Rack |
+| :---: | :---: |
+| ![Pre-Processor Splitters](docs/images/omnisplit_preprocess_splitters.png) | ![8-Slot Effects Rack](docs/images/omnisplit_fx_rack.png) |
+| *Simultaneous extraction across Transient/Sustain, 3-Band ZDF, Mid/Side, Dynamic, Spectral, and Phase domains.* | *8 reorderable effect slots selectable across 35 DSP algorithms with independent input source selection and level staging.* |
+
+| Interactive Visual DAG Cable Routing | Advanced Modulation Suite (LFOs, Turing, XY) |
+| :---: | :---: |
+| ![Audio Routing Diagram](docs/images/omnisplit_routing_diagram.png) | ![Modulators Panel](docs/images/omnisplit_modulators.png) |
+| *Visual patch cords and DAG connection graph displaying multi-stream routing and inter-slot feedback/feedforward paths.* | *3 tempo-synced LFOs, 3 multi-source envelope followers, 2 Turing shift registers, and 2 loopable XY expression pads.* |
+
+| 8-Slot Live Modulation Matrix | Full Sound Design Workspace |
+| :---: | :---: |
+| ![Live Modulation Matrix](docs/images/omnisplit_mod_matrix.png) | ![Full Interface](docs/images/omnisplit_screenshot.png) |
+| *Comprehensive drag-and-drop modulation matrix connecting any internal modulator to DSP parameters with bipolar depth.* | *Complete multi-bus output routing (Main 1+2, Aux 3+4, Aux 5+6, Aux 7+8) for surround and stem mixing.* |
+
+---
+
+## 🌟 Innovation Spotlight: Standout Breakthroughs
+
+> [!IMPORTANT]
+> ### ✂️ 6 Multi-Domain Real-Time Decomposition Splitters
+> Conventional audio plugins only offer simple multiband crossovers. OmniSplit operates across 6 distinct physical and mathematical dimensions:
+> - **Energy-Ratio Transient Splitter**: Isolates the attack click from sustain body with mathematical unity reconstruction.
+> - **3-Band Zero-Delay Feedback (ZDF) Filterbank**: 3 fully parametric SVF channels (LP, HP, BP, Peak, Notch, Shelf) with zero delay.
+> - **Mid/Side Linear Matrix**: Decouples mono fundamentals from stereo spatial width.
+> - **Dynamic Ballistics Splitter**: Splits audio into High (Loud/Forte) vs Low (Quiet/Floor) with smooth soft-knee curves.
+> - **Spectral Harmonicity Filterbank**: Separates pitched tonal harmonics from stochastic noise texture.
+> - **Phase Correlation Estimator**: Isolates centered in-phase mono audio from wide decorrelated stereo ambience.
+
+> [!TIP]
+> ### 🔌 Interactive Visual Cable Patching & 25-Source Input Matrix
+> Every slot in the 8-effect rack can independently listen to any of the 16 pre-processor split streams or feed from other effect slots. The **Interactive Audio Routing Diagram** lets you drag visual patch cables to build complex series, parallel, and feedback routing networks with zero latency penalty.
+
+---
+
+## 🎛️ Pairs Well With: Studio Ecosystem Synergy
+
+OmniSplit is the ultimate downstream surgical processor for the **MTYAS Audio Suite**:
 
 ```
-+----------------------------------------------------------------------------------------------------+
-|  OMNISPLIT                      [ PRESET: 01 - Harmonic Shimmer & Spatialize ]     [UNDO] [REDO]   |
-+----------------------------------------------------------------------------------------------------+
-|  1. PRE-PROCESSORS (6 Splitters) |  2. EFFECTS RACK (8 Modular Slots)  |  3. MODULATION ENGINE     |
-|  - Transient Split (Attack/Body) |  - Slot 1..8 with 35 FX Algorithms  |  - 3 LFOs (0.01-50Hz/Sync)|
-|  - 3-Band ZDF Filterbank         |  - Universal 25-Source Input Choice |  - 3 Multi-Source Env Foll|
-|  - Mid / Side & L/R Matrix       |  - 15 Flexible Routing Destinations |  - 2 Turing Shift Regs    |
-|  - Dynamic Split (Loud / Quiet)  |  - Level Staging (In / Out / Mix)   |  - 4 Global Macros        |
-|  - Spectral Harmonic / Noise     |  - Full Tempo Sync Subdivisions     |  - 2 Loopable XY Pads     |
-|  - Phase / Spatial Diffuse       |  - Real-Time Zero-Allocation Audio  |  - 8-Slot Live Mod Matrix |
-+----------------------------------+-------------------------------------+---------------------------+
-|  4. AUDIO ROUTING DIAGRAM        |  5. MASTER & BUS ROUTING (4 Stereo Buses)                       |
-|  - Interactive Cable Patching    |  - Bus 1 (Main 1+2), Bus 2 (Aux 3+4), Bus 3 (5+6), Bus 4 (7+8)  |
-|  - Visual DAG Connection Cords   |  - Split Balance, Master Dry/Wet, Master Level Staging          |
-+----------------------------------------------------------------------------------------------------+
+         +-----------------+  +-----------------+  +-----------------+
+         | FORGE64 (Drums) |  | NeoOrgan (Org)  |  | CrossMod (Syn)  |
+         | Multi-out stems |  | Leslie rotor    |  | Screaming FM    |
+         +--------+--------+  +--------+--------+  +--------+--------+
+                  |                    |                    |
+                  | Kick Stem          | Stereo Rotor       | Complex Lead
+                  +--------------------+--------------------+
+                                       |
+                                       v
+                     +--------------------------------------+
+                     |          OmniSplit (Audio FX)        |
+                     | - Surgical Transient / Sustain Split |
+                     | - Mid / Side & Spatial Decoupling    |
+                     | - 8-Slot Modular Effects Rack        |
+                     +--------------------------------------+
 ```
+
+### 1. 🥁 FORGE-64 $\to$ OmniSplit (Surgical Kick Stem Transient & Body Decoupling)
+- **Why It Pairs**: Applying heavy overdrive, bitcrushing, or wavefolding to a full kick drum ruins the sub-bass low end and creates phase-cancellation mud.
+- **Workflow**: Route FORGE-64's **Kick Drum Out** into **OmniSplit**. Engage the **Transient Splitter**:
+  - **Attack (Transient Click)**: The instantaneous initial click of the beater hitting the drumhead dictates the rhythm. Route this stream into OmniSplit's *Chebyshev Wavefolder* or *Bitcrusher* to slice through dense mixes with razor-sharp definition.
+  - **Body (Sustain Boom)**: The low-frequency 50 Hz sub boom dictates the groove. Keep this stream completely clean and uncompressed, locking the sub-bass foundation with flawless phase coherence.
+
+### 2. 🎪 Neo-Organ $\to$ OmniSplit (Rotary Speaker Mid/Side & Spatial Separation)
+- **Why It Pairs**: The Leslie rotary speaker creates a lush, swirling stereo Doppler effect. However, heavy stereo modulation on low organ tonewheels creates center-image weakness.
+- **Workflow**: Route Neo-Organ into OmniSplit. Use the **Mid/Side Splitter** or **Phase / Spatial Splitter**:
+  - Keep the **Mid (In-Phase Mono)** channel clean and focused, centering the organ's fundamental 16' and 8' tonewheel frequencies.
+  - Route the **Side (Spatial Out-of-Phase)** stream through OmniSplit's *Stereo Tape Echo* or *Dattorro Shimmer Reverb* for an enormous swirling halo that never weakens the mix center.
+
+### 3. 🎛️ CrossMod $\to$ OmniSplit (Extreme Timbre Deconstruction)
+- **Why It Pairs**: Extreme Through-Zero FM (TZFM) and oscillator sync produce aggressive high-frequency sidebands.
+- **Workflow**: Route CrossMod into OmniSplit. Use the **Spectral Harmonicity Splitter** to separate the pure tonal pitched core from the noisy FM sidebands, applying pitch shifting or granular reverse delays exclusively to the inharmonic frequencies.
 
 ---
 
-## 📦 Downloads & Pre-Built Binaries
+## 🧩 35 Studio-Grade DSP Algorithms
 
-Pre-compiled production releases for Windows, macOS, and Linux are available from the [**OmniSplit Releases Page**](https://github.com/mtyas/OmniSplit/releases/latest):
+- **Dynamics**: VCA Compressor, Opto Compressor, FET Compressor, Noise Gate.
+- **Equalizers & Filters**: 4-Band Parametric EQ, 8-Band Graphic EQ, Tilt EQ, Dual HP/LP ZDF Filter, Bandpass & Notch Filter.
+- **Distortion & Saturation**: Hard Clipper, Tube Saturation, Wavefolder, Germanium Fuzz, Octave Fuzz, Overdrive, Analog Tape Saturation.
+- **Glitch & Granular**: Bitcrusher, Stutter Repeater, Tape Stop Glitch, Reverse Slice, Granular Jitter.
+- **Pitch & Modulation**: Pitch Shifter ($\pm 24\text{ st}$), Frequency Shifter, Multi-Voice Stereo Chorus, Flanger, 8-Stage Phaser, Tremolo / Auto-Pan.
+- **Delays & Echo**: Stereo Delay, Ping-Pong Delay, Analog Tape Echo.
+- **Reverberation**: Room Reverb, Hall Reverb, Plate Reverb, Spring Reverb, Dattorro Shimmer Reverb.
+
+---
+
+## 📦 Downloads & Installation
+
+Pre-compiled production releases for Windows, macOS, and Linux are available from the [**Releases Page**](https://github.com/mtyas/OmniSplit/releases/latest):
 
 | OS / Platform | Download Package | Included Formats | Architecture |
 | :--- | :--- | :--- | :--- |
@@ -50,97 +139,28 @@ Pre-compiled production releases for Windows, macOS, and Linux are available fro
 
 ---
 
-## ✨ Core Features
+## ⚙️ Architecture & Engineering Specifications
 
-### 1. 🎛️ 6 Advanced Real-Time Pre-Processor Splitters
-1. **Transient Splitter**:
-   - Energy-envelope ratio detector splitting incoming audio into **Attack (Transient)** and **Body (Sustain)** with zero-latency complementary reconstruction.
-   - Controls: *Attack Time (1–300 ms)*, *Release Time (10–600 ms)*, *Sensitivity*, *Threshold (dB)*, *Lookahead (0–128 samples)*.
-2. **3-Band Zero-Delay Feedback (ZDF) Filterbank**:
-   - 3 independent, fully parametric ZDF State Variable Filter channels with customizable filter curves (LowPass, HighPass, BandPass, Peak, Notch, Shelf).
-   - Controls: *Frequency (20 Hz–20 kHz)*, *Q (0.1–10.0)*, *Gain ($\pm 18\text{ dB}$)*, *Drive (1–4x)*, *Solo / Mute*.
-3. **Mid / Side & L/R Decomposition Matrix**:
-   - Pure linear matrixing ($\text{Mid} = \frac{L+R}{\sqrt{2}}$, $\text{Side} = \frac{L-R}{\sqrt{2}}$) and discrete Left/Right channels with bit-exact complementary sum.
-   - Controls: *Stereo Width ($0.0\dots 2.0$)*, *L/R Balance ($-1.0\dots +1.0$)*.
-4. **Dynamic Amplitude Splitter**:
-   - Splits audio into **Dynamic High (Loud Peaks / Forte)** vs **Dynamic Low (Quiet Floor / Ghost Notes / Tails)** using smooth ballistics with soft-knee interpolation.
-   - Controls: *Threshold ($-60\dots 0\text{ dB}$)*, *Attack ($0.5\dots 300\text{ ms}$)*, *Release ($5\dots 1500\text{ ms}$)*, *Knee Width ($0.1\dots 24\text{ dB}$)*.
-5. **Spectral & Harmonic Decomposition**:
-   - 8-band Zero-Delay Feedback (ZDF) tracking filter bank separating steady pitched **Harmonic / Tonal** audio from stochastic **Noise / Residual** texture with exact unity reconstruction.
-   - Controls: *Harmonic Sensitivity*, *Spectral Focus*, *Smoothing Time (1–100 ms)*.
-6. **Phase & Spatial Correlation Splitter**:
-   - Instantaneous cross-channel correlation estimator ($\rho = \frac{2\langle L,R\rangle}{\langle L,L\rangle + \langle R,R\rangle}$) isolating centered **In-Phase (Mono Coherent)** audio from wide decorrelated **Spatial (Diffuse Ambience)**.
-   - Controls: *Spatial Threshold*, *Window Time (2–80 ms)*, *Spatial Spread*.
+- **C++20 & JUCE 8 Framework**: Fully vector-optimized DSP pipeline.
+- **Zero-Allocation Audio Thread**: 100% lock-free processing with zero dynamic allocations during playback.
+- **Bit-Exact Complementary Reconstruction**: All 6 decomposition splitters sum back to the original source with mathematical unity.
 
----
+### Building from Source
 
-### 2. 🔌 Universal 25-Source Input Matrix & 8 Modular Slots
-Every effect slot in OmniSplit can select from **16 pre-processor audio sources** or **8 inter-slot feedback/feedforward feeds**:
-
-| Index | Audio Stream Source | Index | Audio Stream Source |
-|---|---|---|---|
-| `[0]` | **Disconnected** | `[13]` | **Harmonic (Tonal)** |
-| `[1]` | **Stereo In** | `[14]` | **Noise (Residual)** |
-| `[2]` | **Attack (Transient)** | `[15]` | **In-Phase (Mono Coherent)** |
-| `[3]` | **Body (Sustain)** | `[16]` | **Spatial (Diffuse Ambience)** |
-| `[4..6]` | **Filter 1, 2, 3** | `[17..24]` | **Slot 1..8 Output (Inter-Slot)** |
-| `[7..8]` | **Left (L), Right (R)** | | |
-| `[9..10]`| **Mid (M), Side (S)** | | |
-| `[11..12]`| **Dynamic High, Dynamic Low** | | |
-
----
-
-### 3. 🧩 35 Studio-Grade Effect Algorithms
-- **Dynamics**: VCA Compressor, Opto Compressor, FET Compressor, Noise Gate.
-- **Equalizers & Filters**: 4-Band Parametric EQ, 8-Band Graphic EQ, Tilt EQ, Dual HP/LP ZDF Filter, Bandpass & Notch Filter.
-- **Distortion & Saturation**: Hard Clipper, Tube Saturation, Wavefolder, Germanium Fuzz, Octave Fuzz, Overdrive, Analog Tape Saturation.
-- **Glitch & Granular**: Bitcrusher, Stutter Repeater, Tape Stop Glitch, Reverse Slice, Granular Jitter.
-- **Pitch & Modulation**: Pitch Shifter ($\pm 24\text{ st}$), Frequency Shifter, Multi-Voice Stereo Chorus, Flanger, 8-Stage Phaser, Tremolo / Auto-Pan.
-- **Delays & Echo**: Stereo Delay, Ping-Pong Delay, Analog Tape Echo (with wow/flutter and saturation).
-- **Reverberation**: Algorithmic Room Reverb, Hall Reverb, Plate Reverb, Spring Reverb, Dattorro Shimmer Reverb ($\pm 24\text{ st}$ pitch shift in feedback loop).
-- **Tempo Sync**: 14 musical subdivisions (`Free`, `1/32`, `1/16`, `1/8T`, `1/16D`, `1/8`, `1/4T`, `1/8D`, `1/4`, `1/2T`, `1/4D`, `1/2`, `1 Bar`, `2 Bars`, `4 Bars`) on all time-based effects.
-
----
-
-### 4. 🎛️ Modulation Engine & Live Mod Matrix
-- **3 PolyBLEP LFOs**: Sine, Triangle, Saw Up, Saw Down, Square, Sample & Hold, Smooth Random (0.01 Hz to 50.0 Hz or synced subdivisions from 1/32 to 8 Bars).
-- **3 Multi-Source Envelope Followers**: Fed by any of the 16 pre-processor audio sources.
-- **2 Turing Machine Shift Registers**: Generative musical shift registers with probability, step lengths (4, 8, 16, 32), clock sync, and glide smoothing.
-- **4 Global Macro Knobs & 2 Loopable XY Pads**: Real-time multi-parameter macro controllers with physics-based circular and Lissajous orbit loopers.
-- **8-Slot Modulation Matrix**: 22 modulation sources assignable to 75 plugin parameters with live visual metering.
-
----
-
-### 5. 🔊 4 Stereo Output Buses
-- **Bus 1 (Main 1+2)**: Primary stereo mix output.
-- **Bus 2 (Aux 3+4)**: Secondary stereo stem / sidechain output.
-- **Bus 3 (Aux 5+6)**: Multi-channel sub-mix output.
-- **Bus 4 (Aux 7+8)**: Multi-channel ambient / fx send output.
-
----
-
-## 🛠️ Building OmniSplit
-
-### Prerequisites
-- **CMake 3.22+**
-- **C++20 compliant compiler** (MSVC 2022, GCC 11+, Clang 14+)
-
-### Build Commands
 ```bash
-# Configure build
+git clone --recursive https://github.com/mtyas/OmniSplit.git
+cd OmniSplit
 cmake -B build -DCMAKE_BUILD_TYPE=Release
-
-# Build all plugin formats & unit tests
-cmake --build build --config Release --target OmniSplit_VST3 OmniSplit_CLAP OmniSplit_Standalone OmniSplitTests
-
-# Run automated test suite
-./build/Release/OmniSplitTests.exe
+cmake --build build --config Release --target OmniSplit_All
 ```
 
 ---
 
-## 📖 Documentation
-- [Full User Manual (`MANUAL.md`)](MANUAL.md) - Comprehensive technical guide, DSP architecture, algorithm explanations, and routing reference.
+## ☕ Support & Community
+
+If OmniSplit transforms your sound design, please consider supporting ongoing development:
+
+[![Support on Ko-fi](https://img.shields.io/badge/Ko--fi-Support%20My%20Work-ff5e5b?logo=ko-fi&logoColor=white)](https://ko-fi.com/mtyas)
 
 ---
 
@@ -153,4 +173,6 @@ To support my work and encourage me to do more, please consider leaving a tip at
 ---
 
 ## 📄 License
-Proprietary software. Developed by **mtyas**. All rights reserved.
+
+Copyright © 2026 **mtyas**. All rights reserved.  
+Crafted with [JUCE](https://juce.com) and [CLAP Extensions](https://github.com/free-audio/clap).
